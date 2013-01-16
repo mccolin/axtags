@@ -9,6 +9,5 @@
 
 module AxTags
   class AxParser < Radius::Parser
-  
-  end
-end
+  end # AxParser
+end # AxTags

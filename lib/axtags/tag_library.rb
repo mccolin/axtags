@@ -2,7 +2,7 @@
 # Flexible, extensible custom tag and template-parsing framework built
 # around the Radius templating framework.
 #
-# TagLibrary - Composed of an AxTagContext and an AxTagParser, each library
+# TagLibrary - Composed of an AxContext and an AxParser, each library
 #  class provides the direct interface for defining tags in a given context,
 #  passing local variables to the parser, and managing the parsing process. Best
 #  use calls for the application to create any number of descendant classes of
@@ -38,31 +38,31 @@
 
 module AxTags
   class TagLibrary
-  
+
     def self.context
       @@context ||= AxContext.new
     end
-  
+
     def self.parser
       @@parser ||= AxParser.new(context, :tag_prefix=>"ax")
     end
-  
+
     def self.parse(document, options={})
       if locals = options.delete(:locals)
         locals.each {|arg, value| context.globals.send("#{arg}=", value) }
       end
       parser.parse(document)
     end
-  
+
     def self.build_tags(&block)
       yield context
     end
-  
+
     def self.tag(name, options={}, &block)
       build_tags do |c|
         c.define_tag(name, options, &block)
       end
     end
-    
+
   end
 end

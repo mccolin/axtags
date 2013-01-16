@@ -1,13 +1,19 @@
-# AX TAGS
-# Flexible, extensible custom tag and template-parsing framework built
-# around the Radius templating framework.
+# AWEXOME LABS
+# AxTags
 #
+# A flexible, extensible custom tag and template framework with safe execution of user
+# submitting templating.
 
-# The library composites functionality from Radius:
 require "radius"
 
-# And offers specialized context, parser, and library features:
-require "ax_context"
-require "ax_parser"
-require "tag_library"
+require "axtags/ax_content"
+require "axtags/ax_parser"
+require "axtags/tag_library"
 
+module AxTags
+
+  def self.version
+    Gem.loaded_specs["axtags"].version.to_s
+  end
+
+end # AxTags
