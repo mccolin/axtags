@@ -1,8 +1,72 @@
+= Ax Tags
 
-== Ax Tags
+A flexible, extensible custom tag and template-parsing framework built around the
+{Radius templating framework}[https://github.com/jlong/radius]. A lighter-weight
+alternative to systems like Liquid with XML-style input and output.
 
-Flexible, extensible custom tag and template-parsing framework built around the
-{Radius templating framework}[https://github.com/jlong/radius].
+With AxTags, you create a library of available tags, define their functionality
+against your application (standalone, rails, sinatra, or any other) and begin parsing
+documents containing your custom markup with ease.
+
+
+== Installation
+
+Get up and running fast:
+
+  gem install axtags
+
+Hook up your Gemfile powered applications:
+
+  gem "axtags"
+
+
+== Usage
+
+Getting going with AxTags involves creating a library of tags and then passing documents
+containing your tags through the +parse+ method.
+
+
+=== Build a Tag Library
+
+Your custom TagLibrary class provides the direct interface for both defining tags, passing
+local variables to the parser, and managing the parsing process. To get started, simply
+create your library as a descendant of the +TagLibrary+ class:
+
+  class MyTagLibrary < AxTags::TagLibrary
+    tag "myanchor" do |t|
+      %{<a href="http://awesometown.com/">I am Awesome!</a>}
+    end
+  end
+
+You can see from the example, above, that we've created a tag +myanchor+ which expands to
+an HTML anchor tag with a link to awesometown.com. You can see how this works by attempting
+to parse a document containing your new tag:
+
+  MyTagLibrary.parse("Here is an awesome link: <ax:myanchor/>")
+  => "Here is an awesome link: <a href=\"http://awesometown.com/\">I am awesome!</a>"
+
+
+It's possible to add tags at runtime, as well, by working with the Radius context directly.
+You can accomplish that like so:
+
+  MyTagLibrary.build_tags do |context|
+    context.define_tag("foo") do |t|
+      %{<span class="foo">Bar</span>}
+    end
+  end
+
+This example adds support for the "<ax:foo/>" tag, which would expand on parsing to
+"<span class=\"foo\">Bar</span>".
+
+
+=== Advanced Tags
+
+Tags can be nested, access XML-style attributes, and pass along scope and context to text nodes
+within tags.
+
+Tags can provide looping or repetitive behavior, as well.
+
+_Documentation still pending..._
 
 
 

@@ -17,13 +17,18 @@ Gem::Specification.new do |s|
     "README.rdoc"
   ]
   s.files = [
+    "Gemfile",
+    "Gemfile.lock",
+    "LICENSE.txt",
     "README.rdoc",
+    "Rakefile",
     "VERSION",
+    "axtags.gemspec",
     "lib/axtags.rb",
     "lib/axtags/ax_context.rb",
     "lib/axtags/ax_parser.rb",
     "lib/axtags/tag_library.rb",
-    "lib/version.rb"
+    "spec/axtags_spec.rb"
   ]
   s.homepage = "http://github.com/mccolin/axtags"
   s.licenses = ["MIT"]
