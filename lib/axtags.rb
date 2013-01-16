@@ -6,7 +6,7 @@
 
 require "radius"
 
-require "axtags/ax_content"
+require "axtags/ax_context"
 require "axtags/ax_parser"
 require "axtags/tag_library"
 
